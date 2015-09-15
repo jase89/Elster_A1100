@@ -124,16 +124,26 @@ void loop() {
                 transmittedsFlag=statusFlag;
             }
             //check to see if imports and exports are within range of maximum values.
-            
             else if (imports<=(transmittedImports+70) && exports<=(transmittedExports+70))
             {
                //check to see if data is greater than historic data saved
-               if (imports>=transmittedImports && exports>=transmittedExports)
+               if (exports>=transmittedExports && statusFlag==1)
                {
-                  send8266Data(imports,exports,statusFlag);
+                  send8266Data(imports,exports,statusFlag);          
+                  transmittedImports=imports;
+                  transmittedExports=exports;
+                  transmittedsFlag=statusFlag;         
+               }
+               else if (imports>=transmittedImports && statusFlag==0)
+               {
+                  send8266Data(imports,exports,statusFlag);          
                   transmittedImports=imports;
                   transmittedExports=exports;
                   transmittedsFlag=statusFlag;
+               }
+               else
+               {
+                  Serial.println("Above IR received results not transmitted, erratic and invalid!!!");
                }
             }
             else
