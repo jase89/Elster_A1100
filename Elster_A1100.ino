@@ -124,7 +124,7 @@ void loop() {
                 transmittedsFlag=statusFlag;
             }
             //check to see if imports and exports are within range of maximum values.
-            else if (imports<=(transmittedImports+70) && exports<=(transmittedExports+70))
+            else if (imports<=(transmittedImports+2) && exports<=(transmittedExports+2))
             {
                //check to see if data is greater than historic data saved
                if (exports>=transmittedExports && statusFlag==1)
